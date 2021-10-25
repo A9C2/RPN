@@ -4,7 +4,7 @@
 #include <tgmath.h>
 using namespace std;
 
-const int SIZE = 3;
+const int SIZE = 7;
 
 string stack[SIZE];
 int stackPointer = -1;
@@ -64,7 +64,7 @@ int stackLength() {
 string getNewStackElementInput() {
   string s;
   while (true) {
-    cout << "Wprowadź element do umieszczenia w stosie: ";
+    cout << "Wprowadź pojedynczy element do umieszczenia w stosie: ";
     cin >> s;
 
     if (s.length() == 1 and isOperator(s[0]) and stackLength() >= 2) {
