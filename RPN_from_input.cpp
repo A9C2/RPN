@@ -4,7 +4,9 @@
 #include <tgmath.h>
 using namespace std;
 
-const int SIZE = 7;
+const int SIZE = 10;
+const string SINGLEMODE = "single";
+const string TEXTMODE = "text";
 
 string stack[SIZE];
 int stackPointer = -1;
@@ -99,10 +101,44 @@ string getNewStackElementInput() {
   } 
 }
 
+string programMode() {
+    string decision = "";
+    while (decision != SINGLEMODE and decision != TEXTMODE) {
+        cout << "Wybierz tryb działania programu. Wpisz:" << endl;
+        cout << "single <-- do wprowadzania elementów pojedynczo" << endl;
+        cout << "text <-- do wprowadzania całych wyrażeń" << endl;
+        cin >> decision;
+    }
+    return decision;
+}
+
+void singleMode() {
+    while (stackLength() < SIZE) {
+            push(getNewStackElementInput());
+            displayStack();
+          }
+        cout << "Przekroczono maksymalną wielkość stosu." << stack[0];
+}
+
+string[SIZE] getLineInput()
+
+void textMode() {
+    string lineInput[SIZE] = getLineInput();
+    string currentElement = "";
+    for (int i = 0; i < SIZE; ++i) {
+        if lineInput[i] != " " {
+            currentElement += lineInput[i];
+        } else {
+            push(currentElement);
+        }
+    }
+}
+
 int main() {
-  while (stackLength() < SIZE) {
-    push(getNewStackElementInput());
-    displayStack();
-  }
-  cout << "Przekroczono maksymalną wielkość stosu." << stack[0];
+    if (programMode() == SINGLEMODE) {
+          singleMode();
+    } else if (programMode() == TEXTMODE) {
+        textMode();
+    }
+
 }
