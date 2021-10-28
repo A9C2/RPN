@@ -43,7 +43,13 @@ void push(string newElement) {
 }
 
 string pop() {
-  return stack[stackPointer--];
+  string temp = stack[stackPointer--];
+  stack[stackPointer + 1] = "";
+  return temp;
+}
+
+int stackLength() {
+  return stackPointer + 1;
 }
 
 void displayStack() {
@@ -55,16 +61,15 @@ void displayStack() {
     }
     cout << endl;
   }
-}
-
-int stackLength() {
-  return stackPointer + 1;
+  if (stackLength() == 1) {
+      cout << "Wynik wynosi: " << stack[0] << endl;
+  }
 }
 
 string getNewStackElementInput() {
   string s;
   while (true) {
-    cout << "Wprowadź pojedynczy element do umieszczenia w stosie: ";
+    cout << "Wprowadź pojedynczy element do umieszczenia w stosie: " << "Elementy na stosie: [" << stackLength() << "/" << SIZE << "]";
     cin >> s;
 
     if (s.length() == 1 and isOperator(s[0]) and stackLength() >= 2) {
@@ -95,10 +100,9 @@ string getNewStackElementInput() {
 }
 
 int main() {
-  for (int i = 0; i < SIZE; ++i) {
-    cout << "[" << i + 1 << "/" << SIZE << "] ";
+  while (stackLength() < SIZE) {
     push(getNewStackElementInput());
     displayStack();
   }
-  cout << "Wynik to: " << stack[0];
+  cout << "Przekroczono maksymalną wielkość stosu." << stack[0];
 }
